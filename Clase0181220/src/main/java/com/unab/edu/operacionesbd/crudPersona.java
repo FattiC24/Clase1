@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unab.edu.operacionesBD;
+package com.unab.edu.operacionesbd;
 
 import com.unab.edu.DAO.ClsPersona;
-import com.unab.edu.conexionmysql.ConexionBd;
+import com.unab.edu.conexiónmysql.ConexionBd;
 import com.unab.edu.entidades.Persona;
 import java.sql.Connection;
 import java.util.*;
@@ -76,7 +76,6 @@ public class crudPersona extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tpMostrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tpMostrar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
 
         txtNombres.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -89,7 +88,7 @@ public class crudPersona extends javax.swing.JFrame {
 
         txtID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        btnGuardar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnGuardar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +96,7 @@ public class crudPersona extends javax.swing.JFrame {
             }
         });
 
-        btnActualizar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnActualizar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +104,7 @@ public class crudPersona extends javax.swing.JFrame {
             }
         });
 
-        btnEliminar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,22 +112,22 @@ public class crudPersona extends javax.swing.JFrame {
             }
         });
 
-        lblID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblID.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblID.setText("ID");
 
-        lblNombre.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblNombre.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblNombre.setText("NOMBRES");
 
-        lblApellidos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblApellidos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblApellidos.setText("APELLIDOS");
 
-        lblEdad.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblEdad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblEdad.setText("EDAD");
 
-        lblSexo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblSexo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblSexo.setText("SEXO");
 
-        btnConector.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnConector.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnConector.setText("Conectar");
         btnConector.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,10 +143,10 @@ public class crudPersona extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombres)
-                    .addComponent(txtSexo, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
-                    .addComponent(txtID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
-                    .addComponent(txtApellidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
-                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(txtSexo, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                    .addComponent(txtID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblID)
@@ -227,7 +226,7 @@ public class crudPersona extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,6 +323,7 @@ public class crudPersona extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(crudPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

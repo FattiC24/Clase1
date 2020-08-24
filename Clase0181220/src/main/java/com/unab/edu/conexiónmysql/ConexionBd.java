@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unab.edu.conexionmysql;
+package com.unab.edu.conexiónmysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author andre
+ * @author CruzCalles
  */
 public class ConexionBd {
 
@@ -21,9 +21,9 @@ public class ConexionBd {
 
         try {
             conexion = DriverManager.getConnection("jdbc:mysql://localhost/clase1", "root", "root");
-            System.out.println("¡Conexión Establecida!");
+            System.out.println("Conectado a la Base de Datos");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR EN LA CONEXIÓN: \n\n" + e);
+            JOptionPane.showMessageDialog(null, "Error de coneccion" + e);
         }
     }
 

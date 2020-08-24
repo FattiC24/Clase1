@@ -5,7 +5,7 @@
  */
 package com.unab.edu.DAO;
 
-import com.unab.edu.conexionmysql.ConexionBd;
+import com.unab.edu.conexiónmysql.ConexionBd;
 import com.unab.edu.entidades.Persona;
 import java.sql.*;
 import java.util.*;
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ANDRES CORDOVA
+ * @author CruzCalles
  */
 public class ClsPersona {
 

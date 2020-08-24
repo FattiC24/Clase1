@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unab.edu.clase01180820;
+package com.unab.edu.clase0181220;
 
 /**
  *
- * @author andre
+ * @author CruzCalles
  */
 public class Operaciones extends javax.swing.JFrame {
 
@@ -37,16 +37,21 @@ public class Operaciones extends javax.swing.JFrame {
         lblEtiquetaR = new javax.swing.JLabel();
 
         txtNum1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtNum1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNum1ActionPerformed(evt);
+            }
+        });
 
         txtNum2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
-        lblDato1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        lblDato1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblDato1.setText("Dato 1");
 
-        lblDato2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        lblDato2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblDato2.setText("Dato 2");
 
-        btnSumar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnSumar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnSumar.setText("Sumar");
         btnSumar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,10 +59,10 @@ public class Operaciones extends javax.swing.JFrame {
             }
         });
 
-        lblResultado.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        lblResultado.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblResultado.setText("0");
 
-        lblEtiquetaR.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        lblEtiquetaR.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblEtiquetaR.setText("Resultado:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -65,20 +70,26 @@ public class Operaciones extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(btnSumar, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
-                    .addComponent(lblDato2)
-                    .addComponent(txtNum2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDato1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNum1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblDato2)
+                                    .addComponent(txtNum2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblDato1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(130, 130, 130)
+                                .addComponent(lblEtiquetaR)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblResultado)))
+                        .addGap(0, 142, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblEtiquetaR)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblResultado)))
-                .addGap(27, 27, 27))
+                        .addGap(45, 45, 45)
+                        .addComponent(btnSumar, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,18 +97,18 @@ public class Operaciones extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(lblDato1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNum1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSumar))
-                .addGap(12, 12, 12)
+                .addComponent(txtNum1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
                 .addComponent(lblDato2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNum2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(btnSumar)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblResultado)
-                    .addComponent(lblEtiquetaR))
-                .addContainerGap(105, Short.MAX_VALUE))
+                    .addComponent(lblEtiquetaR)
+                    .addComponent(lblResultado))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -112,6 +123,10 @@ public class Operaciones extends javax.swing.JFrame {
         
         lblResultado.setText(rMostrar);
     }//GEN-LAST:event_btnSumarActionPerformed
+
+    private void txtNum1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNum1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNum1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +153,8 @@ public class Operaciones extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Operaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
