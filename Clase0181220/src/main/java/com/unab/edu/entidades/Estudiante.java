@@ -4,21 +4,16 @@
  * and open the template in the editor.
  */
 package com.unab.edu.entidades;
-import lombok.Data;
+import lombok.*;
 /**
  *
  * @author CruzCalles
  */
-
 @Data
-public class Persona {
+@EqualsAndHashCode(callSuper=false)
+public class Estudiante extends Persona{
     
-    
-    protected int idPersona;
-    protected String Nombre;
-    protected String Apellido;
-    protected int Edad;
-    protected String Sexo;
-    
+    private int  id ;
+    private int matricula;
     
 }

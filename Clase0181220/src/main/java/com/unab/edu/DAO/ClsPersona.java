@@ -35,6 +35,7 @@ public class ClsPersona {
                 persona.setSexo(resultadoConsulta.getString("Sexo"));
                 Personas.add(persona);
             }
+             conectar.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -51,6 +52,7 @@ public class ClsPersona {
             Statement.setString("PSexo", per.getSexo());
             Statement.execute();
             JOptionPane.showMessageDialog(null, "¡Inserción Exitosa!");
+            conectar.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -64,6 +66,7 @@ public class ClsPersona {
             Statement.setInt("PIdPersona", per.getIdPersona());
             Statement.execute();
             JOptionPane.showMessageDialog(null, "¡Datos Eliminados!");
+            conectar.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -80,7 +83,8 @@ public class ClsPersona {
             Statement.setInt("PEdad", per.getEdad());
             Statement.setString("PSexo", per.getSexo());
             Statement.execute();
-            JOptionPane.showMessageDialog(null, "¡Actualización de Datos Exitosa!");
+            JOptionPane.showMessageDialog(null, "Actualización de datos");
+            conectar.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

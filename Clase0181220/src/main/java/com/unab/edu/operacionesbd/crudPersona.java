@@ -220,6 +220,11 @@ public class crudPersona extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tb_Persona.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_PersonaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_Persona);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -296,7 +301,28 @@ public class crudPersona extends javax.swing.JFrame {
 
         personas.ActualizarPersonas(persona);
         MostrarTablaPersona();
+        
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void tb_PersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_PersonaMouseClicked
+        //Modificacion de TabPena.
+        tpMostrar.setSelectedIndex(tpMostrar.indexOfComponent(jPanel1));
+        //Obtener la fila actual que el usuario selecionó
+        int filas = tb_Persona.getSelectedRow();
+        
+        //Sirve para capturar datoa de las tablas, pasandole filas y columnas.
+        String Id = String.valueOf(tb_Persona.getValueAt(filas, 0));
+        String Nombre = String.valueOf(tb_Persona.getValueAt(filas, 1));
+        String Apellido = String.valueOf(tb_Persona.getValueAt(filas, 2));
+        String Edad = String.valueOf(tb_Persona.getValueAt(filas, 3));
+        String Sexo = String.valueOf(tb_Persona.getValueAt(filas, 4));
+        
+        txtID.setText(Id);
+        txtNombres.setText(Nombre);
+        txtApellidos.setText(Apellido);
+        txtEdad.setText(Edad);
+        txtSexo.setText(Sexo);
+    }//GEN-LAST:event_tb_PersonaMouseClicked
 
     /**
      * @param args the command line arguments
