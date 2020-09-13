@@ -5,21 +5,17 @@
  */
 package com.unab.edu.entidades;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 /**
  *
  * @author CruzCalles
  */
-
-@Data
-public class Persona {
+@Data 
+@EqualsAndHashCode(callSuper=false)
+public class Profesor extends Persona{
     
-    
-    protected int idPersona;
-    protected String Nombre;
-    protected String Apellido;
-    protected int Edad;
-    protected String Sexo;
-    
-    
-    
+    private int  idProfesor;
+    private String Dui;
+    private String Usuario;
+    private String Pass;
 }
