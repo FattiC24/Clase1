@@ -12,6 +12,7 @@ import com.unab.edu.entidades.Estudiante;
 import com.unab.edu.entidades.Persona;
 import java.sql.Connection;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,17 +25,37 @@ public class CrudEstudiante extends javax.swing.JFrame {
      * Creates new form CrudEstudiante
      */
     public CrudEstudiante() {
-        initComponents();
+        initComponents();  
         MostrarTablaEstudiante();
         MostrarPersonaSeleccionada();
-        limpiardatos();
-    }
-     ConexionBd classConectar = new ConexionBd();
-        Connection conectar = classConectar.retornarConexion(); 
+        displayMember();
         
+    }
+    
+    String valueMember[];
+    int contador = 0;
+
+    void displayMember() {
+        DefaultComboBoxModel cbdefault = new DefaultComboBoxModel();
+        ClsPersona clasePersona = new ClsPersona();
+        ArrayList<Persona> Personas = clasePersona.MostrarPersona();
+        valueMember = new String[Personas.size()];
+        String filas[] = new String[5];
+        for (var iterarDatosPersona : Personas) {
+            filas[0] = String.valueOf(iterarDatosPersona.getIdPersona());
+            filas[1] = iterarDatosPersona.getNombre();
+        valueMember[contador] = filas[0];
+        cbdefault.addElement(filas[1]);
+        contador++;
+        }
+        cbPersonas.setModel(cbdefault);
+    }
+    ConexionBd classConectar = new ConexionBd();
+    Connection conectar = classConectar.retornarConexion();
+
     void MostrarTablaEstudiante() {
 
-        String TITULOS[] = {"IDESTUDIANTE", "MATRICULA", "IDPERSONA","NOMBRE", "USUARIO", "PASSWORD", "NIE"};
+        String TITULOS[] = {"IDESTUDIANTE", "MATRICULA", "IDPERSONA", "NOMBRE", "USUARIO", "PASSWORD", "NIE"};
         DefaultTableModel ModeloTabla = new DefaultTableModel(null, TITULOS);
         ClsEstudiante claseEstudiante = new ClsEstudiante();
         var MostrarTablaEstudiante = claseEstudiante.MostrarEstudiante();
@@ -48,14 +69,13 @@ public class CrudEstudiante extends javax.swing.JFrame {
             filas[4] = iterarDatosEstudiante.getUsu();
             filas[5] = iterarDatosEstudiante.getPass();
             filas[6] = String.valueOf(iterarDatosEstudiante.getNie());
-            
+
             ModeloTabla.addRow(filas);
         }
 
         tb_Estudiante.setModel(ModeloTabla);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -69,7 +89,6 @@ public class CrudEstudiante extends javax.swing.JFrame {
         txtIdPersona = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         txtPass = new javax.swing.JTextField();
-        txtIdEstudiante = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -78,12 +97,11 @@ public class CrudEstudiante extends javax.swing.JFrame {
         lblApellidos = new javax.swing.JLabel();
         lblEdad = new javax.swing.JLabel();
         PASS = new javax.swing.JLabel();
-        btnConector = new javax.swing.JButton();
         lblSexo2 = new javax.swing.JLabel();
         txtNIE = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tb_SeleccionarPersona = new javax.swing.JTable();
-        lblID1 = new javax.swing.JLabel();
+        cbPersonas = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_Estudiante = new javax.swing.JTable();
@@ -108,8 +126,6 @@ public class CrudEstudiante extends javax.swing.JFrame {
         txtUsuario.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         txtPass.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-
-        txtIdEstudiante.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
         btnGuardar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -161,115 +177,93 @@ public class CrudEstudiante extends javax.swing.JFrame {
         PASS.setForeground(new java.awt.Color(255, 255, 255));
         PASS.setText("PASSWORD");
 
-        btnConector.setBackground(new java.awt.Color(255, 255, 255));
-        btnConector.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnConector.setForeground(new java.awt.Color(0, 0, 0));
-        btnConector.setText("Conectar");
-        btnConector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConectorActionPerformed(evt);
-            }
-        });
-
         lblSexo2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblSexo2.setForeground(new java.awt.Color(255, 255, 255));
         lblSexo2.setText("NIE");
 
         txtNIE.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        tb_SeleccionarPersona.setAutoCreateRowSorter(true);
-        tb_SeleccionarPersona.setBackground(new java.awt.Color(255, 255, 255));
-        tb_SeleccionarPersona.setFont(new java.awt.Font("Eras Medium ITC", 1, 14)); // NOI18N
-        tb_SeleccionarPersona.setForeground(new java.awt.Color(0, 0, 0));
-        tb_SeleccionarPersona.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "IdPersona", "Nombre Persona"
-            }
-        ));
-        tb_SeleccionarPersona.setGridColor(new java.awt.Color(0, 0, 0));
-        tb_SeleccionarPersona.setSelectionBackground(new java.awt.Color(255, 0, 255));
-        tb_SeleccionarPersona.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_SeleccionarPersonaMouseClicked(evt);
+        cbPersonas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPersonasActionPerformed(evt);
             }
         });
-        jScrollPane2.setViewportView(tb_SeleccionarPersona);
 
-        lblID1.setBackground(new java.awt.Color(153, 153, 255));
-        lblID1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lblID1.setForeground(new java.awt.Color(255, 255, 255));
-        lblID1.setText("SELECCIONA LA PERSONA");
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setText("Nuevo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(btnGuardar)
-                .addGap(81, 81, 81)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnActualizar)
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(btnConector)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblID1)
-                        .addGap(231, 231, 231))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblID)
-                    .addComponent(lblNombre)
-                    .addComponent(lblApellidos)
-                    .addComponent(lblEdad)
-                    .addComponent(PASS)
-                    .addComponent(lblSexo2)
-                    .addComponent(txtNIE, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdPersona, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMatricula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(196, 196, 196))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(63, 63, 63)
+                        .addComponent(btnGuardar)
+                        .addGap(57, 57, 57)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addComponent(btnActualizar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblID)
+                            .addComponent(lblNombre)
+                            .addComponent(lblApellidos)
+                            .addComponent(lblEdad)
+                            .addComponent(PASS)
+                            .addComponent(lblSexo2)
+                            .addComponent(txtNIE, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                            .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                            .addComponent(txtIdPersona, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                            .addComponent(txtMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                            .addComponent(cbPersonas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
+                        .addComponent(jButton1)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(lblID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtIdEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblNombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblApellidos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIdPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(lblID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblEdad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblID1)
-                        .addGap(21, 21, 21)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton1)))
+                .addGap(11, 11, 11)
+                .addComponent(lblNombre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblApellidos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIdPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblEdad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(PASS)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -283,7 +277,7 @@ public class CrudEstudiante extends javax.swing.JFrame {
                     .addComponent(btnGuardar)
                     .addComponent(btnEliminar)
                     .addComponent(btnActualizar)
-                    .addComponent(btnConector))
+                    .addComponent(jButton2))
                 .addGap(31, 31, 31))
         );
 
@@ -326,7 +320,7 @@ public class CrudEstudiante extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,11 +356,11 @@ public class CrudEstudiante extends javax.swing.JFrame {
         String IdEstudiante = String.valueOf(tb_Estudiante.getValueAt(filas, 0));
         String Matricula = String.valueOf(tb_Estudiante.getValueAt(filas, 1));
         String IdPersona = String.valueOf(tb_Estudiante.getValueAt(filas, 2));
-        String Usuario = String.valueOf(tb_Estudiante.getValueAt(filas,4));
+        String Usuario = String.valueOf(tb_Estudiante.getValueAt(filas, 4));
         String Pass = String.valueOf(tb_Estudiante.getValueAt(filas, 5));
         String Nie = String.valueOf(tb_Estudiante.getValueAt(filas, 6));
 
-        txtIdEstudiante.setText(IdEstudiante);
+        //txtIdEstudiante.setText(IdEstudiante);
         txtMatricula.setText(Matricula);
         txtIdPersona.setText(IdPersona);
         txtUsuario.setText(Usuario);
@@ -374,73 +368,73 @@ public class CrudEstudiante extends javax.swing.JFrame {
         txtNIE.setText(Nie);
     }//GEN-LAST:event_tb_EstudianteMouseClicked
 
-    private void btnConectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectorActionPerformed
-        ConexionBd classConectar = new ConexionBd();
-        Connection conectar = classConectar.retornarConexion();
-        
-    }//GEN-LAST:event_btnConectorActionPerformed
-     
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         ClsEstudiante estudiante = new ClsEstudiante();
         Estudiante est = new Estudiante();
 
-        est.setIdEstudiante(Integer.parseInt(txtIdEstudiante.getText()));
+        //est.setIdEstudiante(Integer.parseInt(txtIdEstudiante.getText()));
 
         estudiante.BorrarEstudiante(est);
         MostrarTablaEstudiante();
-        limpiardatos();
-        
+       
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-       ClsEstudiante estudiante = new ClsEstudiante();
+        ClsEstudiante estudiante = new ClsEstudiante();
         Estudiante est = new Estudiante();
 
-        est.setIdEstudiante(Integer.parseInt(txtIdEstudiante.getText()));
+       // est.setIdEstudiante(Integer.parseInt(txtIdEstudiante.getText()));
         est.setMatricula(Integer.parseInt(txtMatricula.getText()));
         est.setIdPersona(Integer.parseInt(txtIdPersona.getText()));
         est.setUsu(txtUsuario.getText());
         est.setPass(txtPass.getText());
         est.setNie(Integer.parseInt(txtNIE.getText()));
-        
 
         estudiante.ActualizarEstudiante(est);
         MostrarTablaEstudiante();
-        limpiardatos();
+       
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       ClsEstudiante estudiante = new ClsEstudiante();
-       Estudiante est = new Estudiante();
+        ClsEstudiante estudiante = new ClsEstudiante();
+        Estudiante est = new Estudiante();
 
         est.setMatricula(Integer.parseInt(txtMatricula.getText()));
-        est.setIdPersona(Integer.parseInt(txtIdPersona.getText()));
+        //est.setIdPersona(Integer.parseInt(txtIdPersona.getText()));
+        est.setIdPersona(Integer.parseInt(valueMember[cbPersonas.getSelectedIndex()]));
         est.setUsu(txtUsuario.getText());
         est.setPass(txtPass.getText());
         est.setNie(Integer.parseInt(txtNIE.getText()));
 
         estudiante.AgregarEstudiante(est);
         MostrarTablaEstudiante();
-        limpiardatos();
         
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void tb_SeleccionarPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_SeleccionarPersonaMouseClicked
-        //MOVILIZACION DE TBPANE
-        tpMostrar.setSelectedIndex(tpMostrar.indexOfComponent(jPanel1));
-        //OBTENER LA FILA ACTUAL QUE EL USUARIO SELECCIONO
-        int fila = tb_SeleccionarPersona.getSelectedRow();
+    private void cbPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPersonasActionPerformed
+        displayMember();
         
-        
-        //GEVALUEAT SIRVE PARA CAPTURAR DATOS DE LAS TABLAS
-        String ID = String.valueOf(tb_SeleccionarPersona.getValueAt(fila, 0));
-        
-        txtIdPersona.setText(ID);
-        
-    }//GEN-LAST:event_tb_SeleccionarPersonaMouseClicked
+// TODO add your handling code here:
+    }//GEN-LAST:event_cbPersonasActionPerformed
 
-    void MostrarPersonaSeleccionada(){
-    String TITULOS[] = {"ID", "NOMBRE"};
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //txtIdPersona.setText(valueMember[cbPersonas.getSelectedIndex()]);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    // txtIdEstudiante.setText("");
+        txtMatricula.setText("");
+        txtIdPersona.setText("");
+        txtUsuario.setText("");
+        txtPass.setText("");
+        txtNIE.setText("");
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    void MostrarPersonaSeleccionada() {
+        String TITULOS[] = {"ID", "NOMBRE"};
         DefaultTableModel ModeloTabla = new DefaultTableModel(null, TITULOS);
         ClsPersona clasePersona = new ClsPersona();
         ArrayList<Persona> Personas = clasePersona.MostrarPersona();
@@ -450,18 +444,9 @@ public class CrudEstudiante extends javax.swing.JFrame {
             filas[1] = IterarDatosPersona.getNombre();
             ModeloTabla.addRow(filas);
         }
-        tb_SeleccionarPersona.setModel(ModeloTabla);  
-    } 
-    void limpiardatos()
-        {
-            txtIdEstudiante.setText("");
-            txtMatricula.setText("");
-            txtIdPersona.setText("");
-            txtUsuario.setText("");
-            txtPass.setText("");
-            txtNIE.setText("");
-            
-        }
+        //tb_SeleccionarPersona.setModel(ModeloTabla);
+    }
+
     /*
      * @param args the command line arguments
      */
@@ -500,25 +485,23 @@ public class CrudEstudiante extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PASS;
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnConector;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> cbPersonas;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblID;
-    private javax.swing.JLabel lblID1;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblSexo1;
     private javax.swing.JLabel lblSexo2;
     private javax.swing.JTable tb_Estudiante;
-    private javax.swing.JTable tb_SeleccionarPersona;
     private javax.swing.JTabbedPane tpMostrar;
-    private javax.swing.JTextField txtIdEstudiante;
     private javax.swing.JTextField txtIdPersona;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNIE;
